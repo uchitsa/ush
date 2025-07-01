@@ -1,1 +1,1 @@
-# ush
+# uchitsa shell
