@@ -46,35 +46,17 @@ char **ush_split_line(char *line) {
 #define USH_RL_BUFSIZE 1024
 
 char *ush_read_line(void) {
-    int bufsize = USH_RL_BUFSIZE;
-    int pos = 0;
-    char *buf = malloc(sizeof(char) * bufsize);
-    int c;
+    char *line = NULL;
+    ssize_t bufsize = 0;
 
-    if (!buf) {
-        fprintf(stderr, "ush: allocation error\n");
-        exit(EXIT_FAILURE);
-    }
-
-    while (1) {
-        c = getchar();
-
-        if (c == EOF || c == '\n') {
-            buf[pos] = '\0';
-            return buf;
+    if (getline(&line, &bufsize, stdin) == -1) {
+        if (feof(stdin)) {
+            exit(EXIT_SUCCESS);
         } else {
-            buf[pos] = c;
-        }
-        pos++;
-
-        if (pos == bufsize) {
-            bufsize += USH_RL_BUFSIZE;
-            buf = realloc(buf, bufsize);
-            if (!buf) {
-                fprintf(stderr, "ush: allocation error\n");
-                exit(EXIT_FAILURE);
-            }
+            perror("readline");
+            exit(EXIT_FAILURE);
         }
     }
+    return line;
 }
 
