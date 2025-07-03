@@ -55,5 +55,26 @@ char *ush_read_line(void) {
         fprintf(stderr, "ush: allocation error\n");
         exit(EXIT_FAILURE);
     }
+
+    while (1) {
+        c = getchar();
+
+        if (c == EOF || c == '\n') {
+            buf[pos] = '\0';
+            return buf;
+        } else {
+            buf[pos] = c;
+        }
+        pos++;
+
+        if (pos == bufsize) {
+            bufsize += USH_RL_BUFSIZE;
+            buf = realloc(buf, bufsize);
+            if (!buf) {
+                fprintf(stderr, "ush: allocation error\n");
+                exit(EXIT_FAILURE);
+            }
+        }
+    }
 }
 
