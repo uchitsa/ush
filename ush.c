@@ -43,6 +43,17 @@ char **ush_split_line(char *line) {
     return NULL;
 }
 
+#define USH_RL_BUFSIZE 1024
+
 char *ush_read_line(void) {
+    int bufsize = USH_RL_BUFSIZE;
+    int pos = 0;
+    char *buf = malloc(sizeof(char) * bufsize);
+    int c;
+
+    if (!buf) {
+        fprintf(stderr, "ush: allocation error\n");
+        exit(EXIT_FAILURE);
+    }
 }
 
