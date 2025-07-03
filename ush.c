@@ -39,7 +39,13 @@ int ush_execute(char **args) {
     return 0;
 }
 
+#define USH_TOK_BUFSIZE 64
+#define USH_TOK_DELIM " \t\r\n\a"
 char **ush_split_line(char *line) {
+    int bufsize = USH_TOK_BUFSIZE, pos = 0;
+    char **tokens = malloc(bufsize * sizeof(char *));
+    char *token;
+    ¬
     return NULL;
 }
 
