@@ -41,10 +41,16 @@ int ush_execute(char **args) {
 
 #define USH_TOK_BUFSIZE 64
 #define USH_TOK_DELIM " \t\r\n\a"
+
 char **ush_split_line(char *line) {
     int bufsize = USH_TOK_BUFSIZE, pos = 0;
     char **tokens = malloc(bufsize * sizeof(char *));
     char *token;
+
+    if (!tokens) {
+        fprintf(stderr, "ush: allocation error\n");
+        exit(EXIT_FAILURE);
+    }
     return NULL;
 }
 
