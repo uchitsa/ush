@@ -5,6 +5,7 @@
 #include "ush.h"
 #include <stdlib.h>
 #include <printf.h>
+#include <string.h>
 
 void ush_loop();
 
@@ -51,7 +52,23 @@ char **ush_split_line(char *line) {
         fprintf(stderr, "ush: allocation error\n");
         exit(EXIT_FAILURE);
     }
-    return NULL;
+
+    token = strtok(line, USH_TOK_DELIM);
+    while (token != NULL) {
+        tokens[pos] = token;
+        pos++;
+        if (pos >= bufsize) {
+            bufsize += USH_TOK_BUFSIZE;
+            tokens = realloc(tokens, bufsize * sizeof(char *));
+            if (!tokens) {
+                fprintf(stderr, "ush: allocation error\n");
+                exit(EXIT_FAILURE);
+            }
+        }
+        token = strtok(NULL, USH_TOK_DELIM);
+    }
+    tokens[pos] = NULL;
+    return tokens;
 }
 
 #define USH_RL_BUFSIZE 1024
