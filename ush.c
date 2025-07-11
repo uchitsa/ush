@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <printf.h>
 #include <string.h>
+#include <unistd.h>
 
 void ush_loop();
 
@@ -88,3 +89,22 @@ char *ush_read_line(void) {
     return line;
 }
 
+int ush_launch(char **args) {
+    pid_t pid, wpid;
+    int status;
+
+    pid = fork();
+    if (pid == 0) {
+        if (execvp(args[0], args) == -1) {
+            perror("ush");
+        }
+        exit(EXIT_FAILURE);
+    } else if (pid < 0) {
+        perror("ush");
+    } else {
+        do {
+            wpid = waitpid(pid, &status, WUNTRACED);
+        } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+    }
+    return 1;
+}
