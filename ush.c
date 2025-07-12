@@ -108,3 +108,25 @@ int ush_launch(char **args) {
     }
     return 1;
 }
+
+int ush_cd(char **args);
+
+int ush_help(char **args);
+
+int ust_exit(char **args);
+
+char *builtin_str[] = {
+        "cd",
+        "help",
+        "exit"
+};
+
+int (*builtin_func[])(char **) = {
+        &ush_cd,
+        &ush_help,
+        &ust_exit
+};
+
+int ush_num_builtins() {
+    return sizeof(builtin_str);
+}
