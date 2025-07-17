@@ -130,3 +130,14 @@ int (*builtin_func[])(char **) = {
 int ush_num_builtins() {
     return sizeof(builtin_str);
 }
+
+int ush_cd(char **args) {
+    if (args[1] == NULL) {
+        fprintf(stderr, "ush: expected argument to \"cd\"\n");
+    } else {
+        if (chdir(args[1]) != 0) {
+            perror("ush");
+        }
+    }
+    return 1;
+}
