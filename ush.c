@@ -141,3 +141,15 @@ int ush_cd(char **args) {
     }
     return 1;
 }
+
+int ush_help(char **args) {
+    printf("Uchitsa's shell");
+    printf("Input program name with arguments and press enter");
+    printf("There are some built-in:");
+    for (int i = 0; i < ush_num_builtins(); i++) {
+        printf(" %s\n", builtin_str[i]);
+    }
+    printf("Man command can show info about other programs");λ
+    return 1;
+}
+
