@@ -113,7 +113,7 @@ int ush_cd(char **args);
 
 int ush_help(char **args);
 
-int ust_exit(char **args);
+int ush_exit(char **args);
 
 char *builtin_str[] = {
         "cd",
@@ -154,6 +154,6 @@ int ush_help(char **args) {
 }
 
 
-int ust_exit(char **args) {
+int ush_exit(char **args) {
     return 0;
 };
