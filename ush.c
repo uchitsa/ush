@@ -149,7 +149,11 @@ int ush_help(char **args) {
     for (int i = 0; i < ush_num_builtins(); i++) {
         printf(" %s\n", builtin_str[i]);
     }
-    printf("Man command can show info about other programs");λ
+    printf("Man command can show info about other programs");
     return 1;
 }
 
+
+int ust_exit(char **args) {
+    return 0;
+};
