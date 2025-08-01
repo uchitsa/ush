@@ -124,7 +124,7 @@ char *builtin_str[] = {
 int (*builtin_func[])(char **) = {
         &ush_cd,
         &ush_help,
-        &ust_exit
+        &ush_exit
 };
 
 int ush_num_builtins() {
