@@ -37,10 +37,6 @@ void ush_loop(void) {
     } while (status);
 }
 
-int ush_execute(char **args) {
-    return 0;
-}
-
 #define USH_TOK_BUFSIZE 64
 #define USH_TOK_DELIM " \t\r\n\a"
 
@@ -157,3 +153,16 @@ int ush_help(char **args) {
 int ush_exit(char **args) {
     return 0;
 };
+
+
+int ush_execute(char **args) {
+    if (args[0] == NULL) {
+        return 1;
+    }
+    for (int i = 0; i < ush_num_builtins(); i++) {
+        if (strcmp(args[0], builtin_str[i]) == 0) {
+            return (*builtin_str[i])(args);
+        }
+    }
+    return ush_launch(args);
+}
