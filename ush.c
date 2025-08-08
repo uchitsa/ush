@@ -161,7 +161,7 @@ int ush_execute(char **args) {
     }
     for (int i = 0; i < ush_num_builtins(); i++) {
         if (strcmp(args[0], builtin_str[i]) == 0) {
-            return (*builtin_str[i])(args);
+            return (int) args[0];
         }
     }
     return ush_launch(args);
