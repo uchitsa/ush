@@ -9,7 +9,6 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <stdio.h>
-#include <string.h>
 
 void ush_loop();
 
